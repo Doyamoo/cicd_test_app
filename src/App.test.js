@@ -1,8 +1,35 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, userEvent } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('空白の時は「名無し」を出力する', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  fireEvent.change(screen.getByRole('textbox'), {
+    target: { value: '' },
+  });
+  fireEvent.click(screen.getByText('Click'))
+
+  expect(screen.getByText(/名無し/)).toBeInTheDocument()
+});
+
+test('11文字以上の時は「ERROR!!」を出力する', () => {
+  render(<App />);
+
+  fireEvent.change(screen.getByRole('textbox'), {
+    target: { value: '12345123456' },
+  });
+  fireEvent.click(screen.getByText('Click'))
+
+  expect(screen.getByText(/ERROR!!/)).toBeInTheDocument()
+});
+
+test('1文字以上10文字以内の時はそのまま出力する', () => {
+  render(<App />);
+
+  fireEvent.change(screen.getByRole('textbox'), {
+    target: { value: 'テストネーム' },
+  });
+  fireEvent.click(screen.getByText('Click'))
+
+  expect(screen.getByText(/テストネーム/)).toBeInTheDocument()
 });
