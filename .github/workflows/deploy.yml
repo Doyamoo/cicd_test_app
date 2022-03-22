@@ -20,5 +20,5 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: | #(4)S3のバケットにデプロイする
+        run: | #(4)S3のバケットにデプロイする 
           aws s3 cp --recursive --region ap-northeast-1 build s3://cicd-test-app-20220322
