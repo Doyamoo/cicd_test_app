@@ -1,8 +1,9 @@
 name: Deploy
 on:
-  push:
-      branches:
-        - master # (1)masterブランチにcommitした時を起点にする
+  pull_request:
+    branches:
+      - master
+    types: [closed]
 jobs:
   build:
     runs-on: ubuntu-latest # (2)最新のUbuntu上でコマンドを実行する
