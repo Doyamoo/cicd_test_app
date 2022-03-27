@@ -33,3 +33,14 @@ test('1文字以上10文字以内の時はそのまま出力する', () => {
 
   expect(screen.getByText(/テストネーム/)).toBeInTheDocument()
 });
+
+test('文字数を出力する', () => {
+  render(<App />);
+
+  fireEvent.change(screen.getByRole('textbox'), {
+    target: { value: 'テストネーム文字数' },
+  });
+  fireEvent.click(screen.getByText('Click'))
+
+  expect(screen.getByText(/9/)).toBeInTheDocument()
+});

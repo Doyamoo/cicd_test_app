@@ -11,7 +11,8 @@ class App extends Component {
     super(props)
     this.state  = {
       title: 'Input form',
-      message: 'type your name.'
+      message: 'type your name.',
+      word_len: 0
     }
     this.doChange = this.doChange.bind(this)
     this.doSubmit = this.doSubmit.bind(this)
@@ -20,6 +21,9 @@ class App extends Component {
 
   doChange(event) {    
     this.input = event.target.value
+    this.setState({
+      word_len: event.target.value.length
+    })
   }
 
   doSubmit(event) {
@@ -48,7 +52,7 @@ class App extends Component {
         <div className='alert alert-primary mt-3'>
           <form onSubmit={this.doSubmit}>
             <div className='form-group'>
-              <label>Name:</label>
+              <label>Name: ({this.state.word_len}文字)</label>
               <input type="text" className='form-control' onChange={this.doChange} />
             </div>
             <input type="submit" className='btn btn-primary' value="Click" />
